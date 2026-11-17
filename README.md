@@ -35,8 +35,12 @@ app/                      Aplicação web (front-end) publicada no GitHub Pages
   data/projeto_ods.sqlite Banco de dados consultado no navegador
   vendor/                 sql.js (SQLite em WebAssembly) e Chart.js
   fonts/                  Archivo e Source Serif 4 (licença OFL)
+dados_tratados/           Todos os dados tratados em CSV (um arquivo por tabela e recortes das análises)
 database/
   etl/gerar_banco.py      ETL: gera o SQLite e o script MySQL a partir dos dados brutos
+  etl/exportar_csv.py     Exporta os CSV tratados e reconstrói o banco a partir deles
+  projeto_ods_tratado.sqlite     Banco SQLite montado só com os CSV tratados
+  mysql/carregar_dados_tratados.sql  Cria o banco no MySQL e carrega os CSV (LOAD DATA)
   mysql/projeto_ods_mpv.sql      Script MySQL documentado (criação e carga)
   mysql/consultas_analise.sql    Consultas de estatística descritiva, frequência e regressão
   mysql/resultado_consultas.txt  Saída das consultas executadas no MariaDB
@@ -62,11 +66,12 @@ python -m http.server 8000
 
 A página precisa ser aberta por um servidor (local ou GitHub Pages), porque o navegador bloqueia o carregamento do banco quando o arquivo é aberto direto.
 
-**Regerar o banco de dados:**
+**Regerar o banco de dados e os CSV tratados:**
 
 ```bash
 pip install -r requirements.txt
 python database/etl/gerar_banco.py
+python database/etl/exportar_csv.py
 ```
 
 **Carregar no MySQL 8 / MariaDB e rodar as análises:**

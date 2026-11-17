@@ -10,6 +10,9 @@ Banco **projeto_ods_mpv**, usado pela aplicação web (arquivo SQLite `app/data/
 | `mysql/projeto_ods_mpv.sql` | Cria o banco, as tabelas, as visões e carrega todos os dados |
 | `mysql/consultas_analise.sql` | Consultas de estatística descritiva, frequência, regressão, desigualdade, pesquisa e metas |
 | `mysql/resultado_consultas.txt` | Saída das consultas executadas no MariaDB, para conferência |
+| `etl/exportar_csv.py` | Exporta as tabelas para `dados_tratados/*.csv` e reconstrói o banco só com esses arquivos |
+| `projeto_ods_tratado.sqlite` | Banco SQLite montado a partir dos CSV tratados |
+| `mysql/carregar_dados_tratados.sql` | Cria o banco `projeto_ods_tratado` no MySQL e carrega os CSV com `LOAD DATA` |
 
 ## Como executar
 

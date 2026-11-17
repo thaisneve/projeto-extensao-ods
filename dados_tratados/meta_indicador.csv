@@ -1,0 +1,8 @@
+id_meta,indicador,atual,meta,unidade,medicao
+1,Reconhecimento do uso de ferramentas da qualidade,20,70,%,Reaplicação do questionário e registro dos treinamentos
+2,Percepção de desperdício visível de materiais,60,30,%,Reaplicação do questionário e registros do Caça ao Desperdício
+3,Percepção de controle do consumo de água,50,80,%,Reaplicação do questionário e consumo de água por setor
+4,Percepção de controle do consumo de energia,70,90,%,Reaplicação do questionário e consumo de energia por setor
+5,Orientação ambiental aos aprendizes,90,100,%,Reaplicação do questionário e lista de presença
+6,"Índice de Práticas Ambientais (IPA, 0 a 9)",7.4,8.3,pontos,Cálculo do índice com os novos dados
+7,"Índice de Gestão da Qualidade (IGQ, 0 a 3)",2.1,2.6,pontos,Cálculo do índice com os novos dados

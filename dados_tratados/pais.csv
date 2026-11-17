@@ -1,0 +1,222 @@
+iso_code,nome_en,nome_pt,eh_agregado
+AFG,Afghanistan,Afeganistão,0
+ALB,Albania,Albânia,0
+DEU,Germany,Alemanha,0
+AND,Andorra,Andorra,0
+AGO,Angola,Angola,0
+AIA,Anguilla,Anguila,0
+ATA,Antarctica,Antártida,0
+ATG,Antigua and Barbuda,Antígua e Barbuda,0
+ARG,Argentina,Argentina,0
+DZA,Algeria,Argélia,0
+ARM,Armenia,Armênia,0
+ABW,Aruba,Aruba,0
+SAU,Saudi Arabia,Arábia Saudita,0
+AUS,Australia,Austrália,0
+AZE,Azerbaijan,Azerbaijão,0
+BHS,Bahamas,Bahamas,0
+BGD,Bangladesh,Bangladesh,0
+BRB,Barbados,Barbados,0
+BHR,Bahrain,Barein,0
+BLZ,Belize,Belize,0
+BEN,Benin,Benin,0
+BMU,Bermuda,Bermudas,0
+BLR,Belarus,Bielorrússia,0
+BOL,Bolivia,Bolívia,0
+BWA,Botswana,Botsuana,0
+BRA,Brazil,Brasil,0
+BRN,Brunei,Brunei,0
+BGR,Bulgaria,Bulgária,0
+BFA,Burkina Faso,Burquina Faso,0
+BDI,Burundi,Burundi,0
+BTN,Bhutan,Butão,0
+BEL,Belgium,Bélgica,0
+BIH,Bosnia and Herzegovina,Bósnia e Herzegovina,0
+CPV,Cape Verde,Cabo Verde,0
+CMR,Cameroon,Camarões,0
+KHM,Cambodia,Camboja,0
+CAN,Canada,Canadá,0
+QAT,Qatar,Catar,0
+KAZ,Kazakhstan,Cazaquistão,0
+TCD,Chad,Chade,0
+CHL,Chile,Chile,0
+CHN,China,China,0
+CYP,Cyprus,Chipre,0
+COL,Colombia,Colômbia,0
+COM,Comoros,Comores,0
+PRK,North Korea,Coreia do Norte,0
+KOR,South Korea,Coreia do Sul,0
+CRI,Costa Rica,Costa Rica,0
+CIV,Cote d'Ivoire,Costa do Marfim,0
+HRV,Croatia,Croácia,0
+CUB,Cuba,Cuba,0
+CUW,Curacao,Curaçao,0
+DNK,Denmark,Dinamarca,0
+DJI,Djibouti,Djibuti,0
+DMA,Dominica,Dominica,0
+EGY,Egypt,Egito,0
+SLV,El Salvador,El Salvador,0
+ARE,United Arab Emirates,Emirados Árabes Unidos,0
+ECU,Ecuador,Equador,0
+ERI,Eritrea,Eritreia,0
+SVK,Slovakia,Eslováquia,0
+SVN,Slovenia,Eslovênia,0
+ESP,Spain,Espanha,0
+SWZ,Eswatini,Essuatíni,0
+USA,United States,Estados Unidos,0
+EST,Estonia,Estônia,0
+ETH,Ethiopia,Etiópia,0
+FJI,Fiji,Fiji,0
+PHL,Philippines,Filipinas,0
+FIN,Finland,Finlândia,0
+FRA,France,França,0
+GAB,Gabon,Gabão,0
+GHA,Ghana,Gana,0
+GEO,Georgia,Geórgia,0
+GRD,Grenada,Granada,0
+GRL,Greenland,Groenlândia,0
+GRC,Greece,Grécia,0
+GLP,Guadeloupe,Guadalupe,0
+GTM,Guatemala,Guatemala,0
+GUY,Guyana,Guiana,0
+GUF,French Guiana,Guiana Francesa,0
+GIN,Guinea,Guiné,0
+GNQ,Equatorial Guinea,Guiné Equatorial,0
+GNB,Guinea-Bissau,Guiné-Bissau,0
+GMB,Gambia,Gâmbia,0
+HTI,Haiti,Haiti,0
+HND,Honduras,Honduras,0
+HKG,Hong Kong,"Hong Kong, RAE da China",0
+HUN,Hungary,Hungria,0
+CXR,Christmas Island,Ilha Christmas,0
+COK,Cook Islands,Ilhas Cook,0
+FRO,Faroe Islands,Ilhas Faroé,0
+MHL,Marshall Islands,Ilhas Marshall,0
+SLB,Solomon Islands,Ilhas Salomão,0
+TCA,Turks and Caicos Islands,Ilhas Turcas e Caicos,0
+VGB,British Virgin Islands,Ilhas Virgens Britânicas,0
+IDN,Indonesia,Indonésia,0
+IRQ,Iraq,Iraque,0
+IRL,Ireland,Irlanda,0
+IRN,Iran,Irã,0
+ISL,Iceland,Islândia,0
+ISR,Israel,Israel,0
+ITA,Italy,Itália,0
+YEM,Yemen,Iêmen,0
+JAM,Jamaica,Jamaica,0
+JPN,Japan,Japão,0
+JOR,Jordan,Jordânia,0
+KWT,Kuwait,Kuwait,0
+LAO,Laos,Laos,0
+LSO,Lesotho,Lesoto,0
+LVA,Latvia,Letônia,0
+LBR,Liberia,Libéria,0
+LIE,Liechtenstein,Liechtenstein,0
+LTU,Lithuania,Lituânia,0
+LUX,Luxembourg,Luxemburgo,0
+LBN,Lebanon,Líbano,0
+LBY,Libya,Líbia,0
+MAC,Macao,"Macau, RAE da China",0
+MKD,North Macedonia,Macedônia do Norte,0
+MDG,Madagascar,Madagascar,0
+MWI,Malawi,Malaui,0
+MDV,Maldives,Maldivas,0
+MLI,Mali,Mali,0
+MLT,Malta,Malta,0
+MYS,Malaysia,Malásia,0
+MAR,Morocco,Marrocos,0
+MTQ,Martinique,Martinica,0
+MRT,Mauritania,Mauritânia,0
+MUS,Mauritius,Maurício,0
+MYT,Mayotte,Mayotte,0
+MMR,Myanmar,Mianmar (Birmânia),0
+FSM,Micronesia (country),Micronésia,0
+MDA,Moldova,Moldávia,0
+MNG,Mongolia,Mongólia,0
+MNE,Montenegro,Montenegro,0
+MSR,Montserrat,Montserrat,0
+MOZ,Mozambique,Moçambique,0
+OWID_WRL,World,Mundo,1
+MEX,Mexico,México,0
+NAM,Namibia,Namíbia,0
+NRU,Nauru,Nauru,0
+NPL,Nepal,Nepal,0
+NIC,Nicaragua,Nicarágua,0
+NGA,Nigeria,Nigéria,0
+NIU,Niue,Niue,0
+NOR,Norway,Noruega,0
+NCL,New Caledonia,Nova Caledônia,0
+NZL,New Zealand,Nova Zelândia,0
+NER,Niger,Níger,0
+OMN,Oman,Omã,0
+PLW,Palau,Palau,0
+PAN,Panama,Panamá,0
+PNG,Papua New Guinea,Papua-Nova Guiné,0
+PAK,Pakistan,Paquistão,0
+PRY,Paraguay,Paraguai,0
+NLD,Netherlands,Países Baixos,0
+BES,Bonaire Sint Eustatius and Saba,Países Baixos Caribenhos,0
+PER,Peru,Peru,0
+PYF,French Polynesia,Polinésia Francesa,0
+POL,Poland,Polônia,0
+PRT,Portugal,Portugal,0
+KGZ,Kyrgyzstan,Quirguistão,0
+KIR,Kiribati,Quiribati,0
+KEN,Kenya,Quênia,0
+GBR,United Kingdom,Reino Unido,0
+CAF,Central African Republic,República Centro-Africana,0
+COD,Democratic Republic of Congo,República Democrática do Congo,0
+DOM,Dominican Republic,República Dominicana,0
+COG,Congo,República do Congo,0
+REU,Reunion,Reunião,0
+ROU,Romania,Romênia,0
+RWA,Rwanda,Ruanda,0
+RUS,Russia,Rússia,0
+WSM,Samoa,Samoa,0
+SHN,Saint Helena,Santa Helena,0
+LCA,Saint Lucia,Santa Lúcia,0
+SYC,Seychelles,Seicheles,0
+SEN,Senegal,Senegal,0
+SLE,Sierra Leone,Serra Leoa,0
+SGP,Singapore,Singapura,0
+SXM,Sint Maarten (Dutch part),Sint Maarten,0
+SOM,Somalia,Somália,0
+LKA,Sri Lanka,Sri Lanka,0
+SDN,Sudan,Sudão,0
+SSD,South Sudan,Sudão do Sul,0
+SUR,Suriname,Suriname,0
+SWE,Sweden,Suécia,0
+CHE,Switzerland,Suíça,0
+KNA,Saint Kitts and Nevis,São Cristóvão e Névis,0
+SPM,Saint Pierre and Miquelon,São Pedro e Miquelão,0
+STP,Sao Tome and Principe,São Tomé e Príncipe,0
+VCT,Saint Vincent and the Grenadines,São Vicente e Granadinas,0
+SRB,Serbia,Sérvia,0
+SYR,Syria,Síria,0
+TJK,Tajikistan,Tadjiquistão,0
+THA,Thailand,Tailândia,0
+TWN,Taiwan,Taiwan,0
+TZA,Tanzania,Tanzânia,0
+CZE,Czechia,Tchéquia,0
+PSE,Palestine,Territórios palestinos,0
+TLS,East Timor,Timor-Leste,0
+TGO,Togo,Togo,0
+TON,Tonga,Tonga,0
+TTO,Trinidad and Tobago,Trinidad e Tobago,0
+TUN,Tunisia,Tunísia,0
+TKM,Turkmenistan,Turcomenistão,0
+TUR,Turkey,Turquia,0
+TUV,Tuvalu,Tuvalu,0
+UKR,Ukraine,Ucrânia,0
+UGA,Uganda,Uganda,0
+URY,Uruguay,Uruguai,0
+UZB,Uzbekistan,Uzbequistão,0
+VUT,Vanuatu,Vanuatu,0
+VEN,Venezuela,Venezuela,0
+VNM,Vietnam,Vietnã,0
+WLF,Wallis and Futuna,Wallis e Futuna,0
+ZWE,Zimbabwe,Zimbábue,0
+ZMB,Zambia,Zâmbia,0
+ZAF,South Africa,África do Sul,0
+AUT,Austria,Áustria,0
+IND,India,Índia,0
