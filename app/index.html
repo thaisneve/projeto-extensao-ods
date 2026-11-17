@@ -21,6 +21,7 @@
         <li><a href="#cap3">PIB e CO<sub>2</sub></a></li>
         <li><a href="#explorar">Explorar</a></li>
         <li><a href="#qualidade">Qualidade</a></li>
+        <li><a href="#banco">Banco de dados</a></li>
       </ul>
     </nav>
   </div>
@@ -151,6 +152,30 @@
     <h3>Metas para o próximo semestre</h3>
     <div class="metas" id="metas"></div>
     <details class="sql"><summary>Ver as consultas SQL da pesquisa</summary><pre id="sql-q"></pre></details>
+  </div>
+</section>
+
+<section id="banco" class="capitulo banco">
+  <div class="coluna">
+    <h2>Consulte o banco de dados</h2>
+    <p>Escreva uma consulta SQL e veja o resultado. O banco roda no seu navegador (SQLite), com as mesmas tabelas do script MySQL do projeto. As consultas são feitas sobre uma cópia local, então nada é alterado no site.</p>
+    <div class="exemplos" role="group" aria-label="Consultas de exemplo">
+      <span>Exemplos:</span>
+      <button type="button" data-sql="tabelas">Tabelas e colunas</button>
+      <button type="button" data-sql="brasil">Brasil 1990–2022</button>
+      <button type="button" data-sql="top">Maiores emissores 2022</button>
+      <button type="button" data-sql="pesquisa">Pesquisa: % de Sim</button>
+      <button type="button" data-sql="acoes">Propostas de melhoria</button>
+    </div>
+    <label for="sql-editor" class="rotulo-sql">Consulta SQL</label>
+    <textarea id="sql-editor" spellcheck="false" rows="7"></textarea>
+    <div class="acoes-ex">
+      <button type="button" id="sql-rodar" class="botao">Executar consulta</button>
+      <span class="nota">Atalho: Ctrl + Enter</span>
+      <span id="sql-info" class="aviso" role="status" aria-live="polite"></span>
+    </div>
+    <div class="tabela-rolagem resultado"><table id="sql-resultado"></table></div>
+    <details class="sql"><summary>Ver todas as tabelas e colunas</summary><pre id="sql-esquema"></pre></details>
   </div>
 </section>
 

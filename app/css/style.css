@@ -134,6 +134,21 @@ fieldset input { accent-color: var(--verde); width: 1.1rem; height: 1.1rem; }
 #ex-tabela thead th { position: sticky; top: 0; background: var(--grafite); color: #fff; }
 .topo nav a[aria-current="true"] { background: #2f3d43; color: #fff; box-shadow: inset 0 -3px 0 var(--amarelo); }
 
+/* Console SQL */
+.banco { background: var(--papel); }
+.exemplos { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin: 1.5rem 0 1rem; font: 600 .95rem var(--ui); }
+.exemplos button { font: 600 .9rem var(--ui); min-height: 44px; padding: .5rem .9rem; border-radius: 2rem; border: 2px solid #c3cbc8; background: #fff; color: var(--grafite); cursor: pointer; }
+.exemplos button:hover { border-color: var(--verde); }
+.rotulo-sql { display: block; font: 600 1rem var(--ui); margin-bottom: .4rem; }
+#sql-editor { width: 100%; font: 400 .92rem/1.5 Consolas, "Courier New", monospace; padding: .8rem; border: 2px solid var(--grafite); border-radius: .35rem; background: #fff; color: var(--grafite); resize: vertical; }
+.resultado { margin-top: 1rem; }
+.resultado:empty, .resultado:has(table:empty) { display: none; }
+#sql-resultado { border-collapse: collapse; width: 100%; font: 400 .9rem var(--ui); }
+#sql-resultado th, #sql-resultado td { padding: .4rem .7rem; border-bottom: 1px solid #e3e8e6; text-align: left; white-space: nowrap; }
+#sql-resultado thead th { position: sticky; top: 0; background: var(--grafite); color: #fff; }
+#sql-resultado td.num { text-align: right; font-variant-numeric: tabular-nums; }
+.aviso.erro { color: var(--laranja); }
+
 /* Ações e metas */
 .acoes { padding-left: 1.4rem; }
 .acoes li { margin-bottom: 1rem; }

@@ -19,6 +19,12 @@ Um Mínimo Produto Viável (MPV) de relatório estatístico, aberto à comunidad
 
 Logo abaixo da manchete, um **painel-resumo** mostra os quatro números principais. O **comparador** permite escolher um país (ou usar os atalhos) e um indicador, ver os dados em tabela, baixar em CSV, copiar um link que abre a mesma comparação e conferir a consulta SQL executada.
 
+## Consultar o banco de dados
+
+- **No site:** a seção **Banco de dados** tem um console em que qualquer pessoa digita um `SELECT` e vê o resultado na hora, com exemplos prontos e a lista de tabelas e colunas.
+- **No computador:** baixe `app/data/projeto_ods.sqlite` e abra no [DB Browser for SQLite](https://sqlitebrowser.org/) (aba *Executar SQL*).
+- **No MySQL:** execute `database/mysql/projeto_ods_mpv.sql` no MySQL Workbench e use as consultas de `database/mysql/consultas_analise.sql`.
+
 ## Estrutura do repositório
 
 ```

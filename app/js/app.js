@@ -370,6 +370,62 @@ function qualidade() {
   mostraSQL("sql-q", SQL_PESQ + "\n\n" + SQL_ACOES + "\n" + SQL_METAS);
 }
 
+/* ---------- Console SQL ---------- */
+const EXEMPLOS = {
+  tabelas: "SELECT name AS tabela_ou_visao, type AS tipo\nFROM sqlite_master\nWHERE type IN ('table', 'view')\nORDER BY type, name;",
+  brasil: "SELECT ano, co2_mt, co2_per_capita, co2_por_pib, ROUND(pib / 1e12, 3) AS pib_tri\nFROM emissao\nWHERE iso_code = 'BRA'\nORDER BY ano;",
+  top: "SELECT p.nome_pt AS pais, e.co2_mt, e.co2_per_capita, e.participacao_mundial\nFROM emissao e\nJOIN pais p ON p.iso_code = e.iso_code\nWHERE e.ano = 2022 AND p.eh_agregado = 0\nORDER BY e.co2_mt DESC\nLIMIT 10;",
+  pesquisa: "SELECT ROUND(AVG(separacao_residuos) * 100) AS separacao,\n       ROUND(AVG(controle_agua) * 100) AS agua,\n       ROUND(AVG(controle_energia) * 100) AS energia,\n       ROUND(AVG(desperdicio_visivel) * 100) AS desperdicio,\n       ROUND(AVG(usa_ferramenta_qualidade) * 100) AS ferramenta\nFROM pesquisa_resposta;",
+  acoes: "SELECT id_acao, problema, proposta, iso_9001, iso_14001, prazo\nFROM acao_melhoria\nORDER BY id_acao;",
+};
+const LIMITE_LINHAS = 500;
+
+function consoleSQL() {
+  const ed = document.getElementById("sql-editor");
+  const info = document.getElementById("sql-info");
+  const tab = document.getElementById("sql-resultado");
+  ed.value = EXEMPLOS.top;
+
+  const esquema = q("SELECT name, type FROM sqlite_master WHERE type IN ('table','view') AND name NOT LIKE 'sqlite_%' ORDER BY type, name")
+    .map(t => {
+      const cols = q(`PRAGMA table_info(${t.name})`).map(c => `  ${c.name}  ${c.type || ""}${c.pk ? "  (chave primária)" : ""}`).join("\n");
+      return `${t.type === "view" ? "VISÃO" : "TABELA"} ${t.name}\n${cols}`;
+    }).join("\n\n");
+  document.getElementById("sql-esquema").textContent = esquema;
+
+  const esc = s => String(s).replace(/[&<>]/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[ch]));
+  const rodar = () => {
+    const sql = ed.value.trim();
+    info.classList.remove("erro");
+    tab.innerHTML = "";
+    if (!/^(select|with|pragma)\b/i.test(sql.replace(/^(--[^\n]*\n|\s)+/, ""))) {
+      info.classList.add("erro");
+      info.textContent = "Use apenas consultas de leitura: SELECT, WITH ou PRAGMA.";
+      return;
+    }
+    const t0 = performance.now();
+    try {
+      const res = db.exec(sql);
+      const ms = Math.round(performance.now() - t0);
+      if (!res.length) { info.textContent = `Consulta executada em ${ms} ms, sem linhas no resultado.`; return; }
+      const { columns, values } = res[res.length - 1];
+      const mostra = values.slice(0, LIMITE_LINHAS);
+      tab.innerHTML = `<thead><tr>${columns.map(c => `<th scope="col">${esc(c)}</th>`).join("")}</tr></thead><tbody>` +
+        mostra.map(l => `<tr>${l.map(v => (typeof v === "number"
+          ? `<td class="num">${Number.isInteger(v) ? v : v.toLocaleString("pt-BR", { maximumFractionDigits: 4 })}</td>`
+          : `<td>${v === null ? "<em>nulo</em>" : esc(v)}</td>`)).join("")}</tr>`).join("") + "</tbody>";
+      info.textContent = `${values.length} linha(s) em ${ms} ms` + (values.length > LIMITE_LINHAS ? `; mostrando as ${LIMITE_LINHAS} primeiras.` : ".");
+    } catch (e) {
+      info.classList.add("erro");
+      info.textContent = `Erro na consulta: ${e.message}`;
+    }
+  };
+  document.getElementById("sql-rodar").addEventListener("click", rodar);
+  ed.addEventListener("keydown", e => { if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) { e.preventDefault(); rodar(); } });
+  document.querySelectorAll(".exemplos button").forEach(b => b.addEventListener("click", () => { ed.value = EXEMPLOS[b.dataset.sql]; rodar(); }));
+  rodar();
+}
+
 /* Destaca no menu a seção que está na tela */
 function marcarMenu() {
   const links = [...document.querySelectorAll(".topo nav a")];
@@ -394,6 +450,7 @@ function marcarMenu() {
     capitulo3(br);
     explorar();
     qualidade();
+    consoleSQL();
     estado.textContent = "";
     marcarMenu();
     if (location.hash.startsWith("#explorar?")) document.getElementById("explorar").scrollIntoView();
