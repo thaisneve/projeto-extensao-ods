@@ -1,0 +1,168 @@
+/* Carbono e riqueza – MPV do Projeto de Extensão (Fatec SBC)
+   Paleta inspirada na sinalização de chão de fábrica: concreto, grafite,
+   verde de destaque para o Brasil (efeito Von Restorff) e faixa de atenção amarela. */
+
+@font-face { font-family: "Archivo"; src: url("../fonts/archivo-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Archivo"; src: url("../fonts/archivo-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+@font-face { font-family: "Archivo"; src: url("../fonts/archivo-latin-800-normal.woff2") format("woff2"); font-weight: 800; font-display: swap; }
+@font-face { font-family: "Source Serif 4"; src: url("../fonts/source-serif-4-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Source Serif 4"; src: url("../fonts/source-serif-4-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+@font-face { font-family: "Source Serif 4"; src: url("../fonts/source-serif-4-latin-400-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+
+:root {
+  --concreto: #e6e9e7;
+  --papel: #f6f7f5;
+  --grafite: #1f2b30;
+  --grafite-2: #4a575c;
+  --cinza: #a3adb0;
+  --verde: #0e7a5a;
+  --verde-claro: #d4ebe2;
+  --laranja: #c8411b;
+  --amarelo: #f1c40f;
+  --ui: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --texto: "Source Serif 4", Georgia, serif;
+  --col: 42rem;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 4.5rem; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--concreto); color: var(--grafite); font: 400 1.125rem/1.65 var(--texto); }
+sub { font-size: .7em; line-height: 0; }
+a { color: var(--verde); text-underline-offset: .15em; }
+:focus-visible { outline: 3px solid var(--amarelo); outline-offset: 2px; }
+
+.pular { position: absolute; left: -9999px; }
+.pular:focus { left: 1rem; top: 1rem; background: var(--grafite); color: #fff; padding: .6rem 1rem; z-index: 10; }
+
+/* Cabeçalho: padrão conhecido (lei de Jakob) e só cinco itens (lei de Hick) */
+.topo { position: sticky; top: 0; z-index: 5; background: var(--grafite); color: #fff; }
+.topo-in { max-width: 72rem; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0 1.25rem; }
+.marca { font: 800 1.05rem/1 var(--ui); color: #fff; text-decoration: none; padding: 1.1rem 0; }
+.topo ul { list-style: none; display: flex; gap: .25rem; margin: 0; padding: 0; }
+.topo nav a { display: block; white-space: nowrap; font: 600 .95rem/1 var(--ui); color: #dfe5e3; text-decoration: none; padding: .9rem .8rem; border-radius: .3rem; min-height: 44px; }
+.topo nav a:hover { background: #2f3d43; color: #fff; }
+
+.coluna { max-width: var(--col); margin: 0 auto; padding: 0 1.25rem; }
+
+/* Abertura: a manchete é o elemento principal da página */
+.abertura { padding: 4.5rem 0 2.5rem; background: var(--papel); border-bottom: 6px solid var(--amarelo); }
+.contexto { font: 600 .95rem/1.4 var(--ui); color: var(--grafite-2); margin: 0 0 1.25rem; }
+h1 { font: 800 clamp(2.1rem, 4.6vw, 3.6rem)/1.05 var(--ui); letter-spacing: -.02em; margin: 0 0 1.5rem; max-width: 18ch; }
+.lead { font-size: 1.25rem; margin: 0 0 2rem; }
+.faixa-grafico { max-width: 72rem; margin: 0 auto; padding: 0 1.25rem; }
+.altura-abertura { position: relative; height: clamp(180px, 28vw, 300px); }
+.faixa-grafico figcaption { font: 400 .9rem/1.4 var(--ui); color: var(--grafite-2); margin-top: .5rem; }
+.estado { font: 600 .95rem var(--ui); color: var(--laranja); margin-top: 1rem; }
+.estado:empty { display: none; }
+
+/* Painel-resumo: quatro números (lei de Miller), logo depois da manchete */
+.painel { max-width: 72rem; margin: 2rem auto 0; padding: 0 1.25rem; }
+.painel-in { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin: 0; background: var(--grafite); color: #fff; border-radius: .5rem; overflow: hidden; }
+.painel-in div { padding: 1.1rem 1.25rem; border-right: 1px solid #34444a; }
+.painel-in div:last-child { border-right: 0; }
+.painel-in dt { font: 400 .9rem/1.3 var(--ui); color: #c6d0cd; }
+.painel-in dd { margin: .3rem 0 0; font: 800 1.9rem/1 var(--ui); }
+.painel-in div.br dd { color: #7fd6b4; }
+.painel-in a { color: inherit; text-decoration: none; display: block; }
+.painel-in a:hover dt, .painel-in a:focus-visible dt { text-decoration: underline; }
+@media (max-width: 52rem) { .painel-in { grid-template-columns: 1fr 1fr; } .painel-in div:nth-child(2) { border-right: 0; } .painel-in div:nth-child(-n+2) { border-bottom: 1px solid #34444a; } }
+
+/* Capítulos */
+.capitulo { padding: 4.5rem 0 3.5rem; }
+.capitulo + .capitulo { border-top: 1px solid #cfd5d3; }
+.num-cap { font: 600 .95rem var(--ui); color: var(--verde); margin: 0 0 .4rem; }
+h2 { font: 800 clamp(1.6rem, 3vw, 2.3rem)/1.12 var(--ui); letter-spacing: -.01em; margin: 0 0 1.1rem; }
+h3 { font: 600 1.25rem/1.25 var(--ui); margin: 2.5rem 0 1rem; }
+p { margin: 0 0 1rem; }
+[data-k] { font-weight: 600; }
+.destaque { color: var(--verde); }
+
+figure { margin: 0; background: var(--papel); border-radius: .5rem; padding: 1rem 1rem .75rem; }
+figure figcaption { font: 600 .95rem/1.35 var(--ui); margin-bottom: .6rem; }
+.dupla { max-width: 72rem; margin: 2rem auto; padding: 0 1.25rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+.largo { max-width: 72rem; margin: 2rem auto; }
+@media (min-width: 74rem) { .largo { margin: 2rem auto; } }
+@media (max-width: 74rem) { .largo { margin: 2rem 1.25rem; } }
+@media (max-width: 52rem) { .dupla { grid-template-columns: 1fr; } }
+
+/* Números: até quatro por grupo (lei de Miller) e rótulo colado ao valor (proximidade) */
+.numeros { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem 1.25rem; margin: 1.5rem 0; }
+@media (max-width: 40rem) { .numeros { grid-template-columns: 1fr 1fr; } }
+.numeros div { border-left: 4px solid var(--cinza); padding-left: .8rem; }
+.numeros div.br { border-color: var(--verde); }
+.numeros dt { font: 400 .9rem/1.3 var(--ui); color: var(--grafite-2); }
+.numeros dd { margin: .2rem 0 0; font: 800 1.4rem/1.15 var(--ui); }
+.numeros.dois { grid-template-columns: 1fr 1fr; }
+.numeros.tres { grid-template-columns: repeat(3, 1fr); }
+.nota { font: 400 1rem/1.5 var(--ui); color: var(--grafite-2); }
+
+details.sql { margin-top: 1.5rem; font: 400 .95rem var(--ui); }
+details.sql summary { cursor: pointer; color: var(--verde); font-weight: 600; min-height: 44px; display: flex; align-items: center; }
+details.sql pre { background: var(--grafite); color: #e9efed; padding: 1rem; border-radius: .4rem; overflow-x: auto; font-size: .82rem; line-height: 1.5; white-space: pre-wrap; }
+
+/* Simulador */
+.simulador { margin-top: 2rem; background: var(--papel); border-radius: .5rem; padding: 1.5rem; border-top: 6px solid var(--amarelo); }
+.simulador h3 { margin-top: 0; }
+.simulador label { font: 600 1rem var(--ui); display: block; margin: 1rem 0 .4rem; }
+input[type=range] { width: 100%; height: 44px; accent-color: var(--verde); }
+
+/* Explorar */
+.explorar { background: var(--papel); }
+.explorar figure { background: #fff; }
+.controles { display: grid; gap: .6rem; font: 400 1rem var(--ui); margin-top: 1.5rem; }
+.controles > label { font-weight: 600; }
+select { font: 400 1.05rem var(--ui); padding: .6rem .8rem; min-height: 48px; border: 2px solid var(--grafite); border-radius: .35rem; background: #fff; max-width: 24rem; }
+fieldset { border: 0; padding: 0; margin: .8rem 0 0; display: flex; flex-wrap: wrap; gap: .5rem; }
+legend { font-weight: 600; margin-bottom: .4rem; padding: 0; }
+fieldset label { display: inline-flex; align-items: center; gap: .45rem; padding: .6rem 1rem; min-height: 48px; border: 2px solid #c3cbc8; border-radius: 2rem; cursor: pointer; background: #fff; }
+fieldset label:has(input:checked) { border-color: var(--verde); background: var(--verde-claro); }
+fieldset input { accent-color: var(--verde); width: 1.1rem; height: 1.1rem; }
+
+.atalhos { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin-top: .3rem; }
+.atalhos span { font-weight: 600; }
+.atalhos button, .botao { font: 600 .95rem var(--ui); min-height: 44px; padding: .55rem 1rem; border-radius: 2rem; border: 2px solid var(--grafite); background: #fff; color: var(--grafite); cursor: pointer; }
+.atalhos button[aria-pressed="true"] { background: var(--grafite); color: #fff; }
+.botao { background: var(--verde); border-color: var(--verde); color: #fff; border-radius: .35rem; }
+.botao.secundario { background: #fff; color: var(--verde); }
+.acoes-ex { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem; margin-top: .5rem; }
+.aviso { font: 600 .95rem var(--ui); color: var(--verde); }
+.tabela-rolagem { max-height: 22rem; overflow: auto; background: #fff; border-radius: .4rem; margin-top: .5rem; }
+#ex-tabela { border-collapse: collapse; width: 100%; font: 400 .92rem var(--ui); }
+#ex-tabela th, #ex-tabela td { padding: .4rem .8rem; text-align: right; border-bottom: 1px solid #e3e8e6; }
+#ex-tabela th:first-child, #ex-tabela td:first-child { text-align: left; }
+#ex-tabela thead th { position: sticky; top: 0; background: var(--grafite); color: #fff; }
+.topo nav a[aria-current="true"] { background: #2f3d43; color: #fff; box-shadow: inset 0 -3px 0 var(--amarelo); }
+
+/* Ações e metas */
+.acoes { padding-left: 1.4rem; }
+.acoes li { margin-bottom: 1rem; }
+.acoes li strong { font-family: var(--ui); }
+.acoes .meta-acao { display: block; font: 400 .9rem/1.4 var(--ui); color: var(--grafite-2); }
+.metas { display: grid; gap: .9rem; }
+.meta { font: 400 .95rem/1.3 var(--ui); }
+.meta .barra { position: relative; height: 12px; background: #d6dcda; border-radius: 6px; margin-top: .35rem; }
+.meta .atual { position: absolute; left: 0; top: 0; bottom: 0; background: var(--cinza); border-radius: 6px; }
+.meta .alvo { position: absolute; top: -4px; bottom: -4px; width: 4px; background: var(--verde); border-radius: 2px; }
+.meta .valores { color: var(--grafite-2); }
+
+/* Fechamento: termina com uma mensagem forte (regra do pico-final) */
+.fechamento { background: var(--grafite); color: #f1f4f3; }
+.fechamento h2 { color: #fff; }
+.usos { padding-left: 1.2rem; }
+.usos li { margin-bottom: .8rem; }
+.usos strong { font-family: var(--ui); color: var(--amarelo); }
+.final { font: 800 clamp(1.4rem, 2.6vw, 1.9rem)/1.2 var(--ui); margin-top: 2.5rem; border-left: 6px solid var(--amarelo); padding-left: 1rem; }
+
+.baixar { margin-top: 2rem; }
+.botao-claro { display: inline-flex; align-items: center; min-height: 48px; padding: .7rem 1.2rem; border-radius: .35rem; background: var(--amarelo); color: var(--grafite); font: 600 1rem var(--ui); text-decoration: none; }
+.botao-claro:hover { background: #ffd83d; }
+.rodape { padding: 2.5rem 0 3rem; font: 400 .9rem/1.55 var(--ui); color: var(--grafite-2); }
+
+@media (max-width: 40rem) {
+  .topo-in { flex-direction: column; align-items: flex-start; gap: 0; }
+  .marca { padding: .8rem 0 .2rem; }
+  .topo ul { overflow-x: auto; max-width: 100%; }
+  .topo nav a { padding: .8rem .6rem; }
+  .numeros.dois, .numeros.tres { grid-template-columns: 1fr; }
+}
