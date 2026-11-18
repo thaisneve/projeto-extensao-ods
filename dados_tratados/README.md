@@ -11,6 +11,7 @@ Todos os dados usados no projeto, já limpos e organizados, em CSV. São os mesm
 | `pesquisa_resposta.csv` | 10 | Respostas anônimas do checklist ambiental e de qualidade (1 = Sim, 0 = Não) |
 | `acao_melhoria.csv` | 6 | Propostas de melhoria com requisitos da ISO 9001 e da ISO 14001 |
 | `meta_indicador.csv` | 7 | Metas dos resultados esperados |
+| `indice_alerta.csv` | 153 | Índice de alerta por país (dado derivado, calculado por `database/indice_alerta.sql`) |
 | `vw_indices_pesquisa.csv` | 10 | Índices por respondente: IPA (0 a 9) e IGQ (0 a 3) |
 | `brasil_1990_2022.csv` | 33 | Recorte do Brasil usado na estatística descritiva e na regressão |
 | `paises_2022.csv` | 218 | Recorte dos países em 2022, com posição em volume, usado na análise de desigualdade |

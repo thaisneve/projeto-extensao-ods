@@ -197,6 +197,8 @@ con.executemany("INSERT INTO emissao VALUES (?,?,?,?,?,?,?,?,?,?)",
 con.executemany("INSERT INTO pesquisa_resposta VALUES (" + ",".join("?" * 16) + ")", list(linhas_pesquisa()))
 con.executemany("INSERT INTO acao_melhoria VALUES (?,?,?,?,?,?,?,?,?)", ACOES)
 con.executemany("INSERT INTO meta_indicador VALUES (?,?,?,?,?,?)", METAS)
+# Índice de alerta: tabela derivada do próprio banco (database/indice_alerta.sql)
+con.executescript((RAIZ / "database" / "indice_alerta.sql").read_text(encoding="utf-8"))
 con.commit(); con.execute("VACUUM"); con.close()
 
 # ----------------------------------------------------------------------------
@@ -227,6 +229,7 @@ CREATE DATABASE IF NOT EXISTS projeto_ods_mpv CHARACTER SET utf8mb4 COLLATE utf8
 USE projeto_ods_mpv;
 DROP VIEW IF EXISTS vw_indices_pesquisa;
 DROP VIEW IF EXISTS vw_emissao;
+DROP TABLE IF EXISTS indice_alerta;
 DROP TABLE IF EXISTS emissao;
 DROP TABLE IF EXISTS pais;
 DROP TABLE IF EXISTS pesquisa_resposta;
@@ -239,7 +242,8 @@ MYSQL.write_text(
     inserts("pais", paises[["iso_code", "country", "nome_pt", "eh_agregado"]].values.tolist()) + "\n\n" +
     inserts("emissao", emis_rows) + "\n\n" +
     inserts("pesquisa_resposta", list(linhas_pesquisa())) + "\n\n" +
-    inserts("acao_melhoria", ACOES) + "\n\n" + inserts("meta_indicador", METAS) + "\n" + VIEWS +
+    inserts("acao_melhoria", ACOES) + "\n\n" + inserts("meta_indicador", METAS) + "\n" + VIEWS + "\n" +
+    (RAIZ / "database" / "indice_alerta.sql").read_text(encoding="utf-8") +
     "\n-- Consultas de análise: ver database/mysql/consultas_analise.sql\n", encoding="utf-8")
 
 print(f"SQLite: {SQLITE} ({SQLITE.stat().st_size/1024:.0f} KB) | países: {len(paises)} | linhas de emissão: {len(emis)}")

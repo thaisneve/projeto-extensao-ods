@@ -13,6 +13,7 @@ Banco **projeto_ods_mpv**, usado pela aplicação web (arquivo SQLite `app/data/
 | `etl/exportar_csv.py` | Exporta as tabelas para `dados_tratados/*.csv` e reconstrói o banco só com esses arquivos |
 | `projeto_ods_tratado.sqlite` | Banco SQLite montado a partir dos CSV tratados |
 | `mysql/carregar_dados_tratados.sql` | Cria o banco `projeto_ods_tratado` no MySQL e carrega os CSV com `LOAD DATA` |
+| `indice_alerta.sql` | Cria a tabela derivada `indice_alerta` (roda igual no SQLite 3.25+ e no MySQL 8 / MariaDB) |
 
 ## Como executar
 
@@ -83,6 +84,23 @@ Chave primária: (`iso_code`, `ano`). 7.276 registros.
 | atual, meta | DECIMAL(6,2) | Valor atual e valor desejado |
 | unidade | VARCHAR(10) | `%` ou `pontos` |
 | medicao | VARCHAR(160) | Como a meta será medida |
+
+### indice_alerta (dado derivado)
+Calculada pelo próprio banco com `database/indice_alerta.sql`, a partir de `emissao`. Inclui os 153 países com pelo menos 1 milhão de habitantes e dados completos em 2012 e 2022.
+
+| Coluna | Tipo | Descrição |
+|---|---|---|
+| iso_code, nome_pt | VARCHAR | País (chave primária: iso_code) |
+| populacao | BIGINT | População em 2022 |
+| co2_2012, co2_2022 | DECIMAL | Emissões em Mt nos dois anos |
+| variacao_10anos_pct | DECIMAL | Variação das emissões de 2012 a 2022, em % |
+| co2_per_capita, co2_por_pib | DECIMAL | Valores de 2022 |
+| dependencia_petroleo_pct | DECIMAL | Parcela do CO₂ que vem do petróleo, em % |
+| projecao_co2_2030 | DECIMAL | co2_2022 + inclinação × 8; inclinação = reta de mínimos quadrados de 2012 a 2022 |
+| nota_tendencia, nota_per_capita, nota_intensidade, nota_petroleo | DECIMAL | 100 × `PERCENT_RANK()` de cada sinal (0 = melhor, 100 = pior) |
+| indice_alerta | DECIMAL | 0,35 × tendência + 0,25 × per capita + 0,25 × intensidade + 0,15 × petróleo |
+| nivel_alerta | VARCHAR | Alto (70 ou mais), Moderado (40 a 69,9) ou Baixo (abaixo de 40) |
+| posicao_alerta | INT | `RANK()` pelo índice, do maior para o menor |
 
 ### Visões
 - **vw_emissao**: `emissao` com `nome_pt` e `eh_agregado`.

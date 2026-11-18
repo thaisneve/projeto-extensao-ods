@@ -4,24 +4,28 @@ Projeto de Extensão do 4º semestre do curso de **Informática para Negócios**
 
 **Autora:** Thais Mendes da Silva
 
-**Aplicação publicada:** https://thaisneve.github.io/projeto-extensao-ods/ (depois de ativar o GitHub Pages, veja abaixo)
+**Aplicação publicada:** https://thaisneve.github.io/projeto-extensao-ods/
 
 ---
 
 ## O que é
 
-Um Mínimo Produto Viável (MPV) de relatório estatístico, aberto à comunidade, que usa **dados abertos sobre meio ambiente** e um **diagnóstico de gestão da qualidade** para apoiar decisões. A aplicação conta uma história em quatro capítulos:
+Um site que mostra, com dados públicos, se o Brasil está conseguindo crescer a economia emitindo menos CO₂. Ele também traz uma pesquisa feita com jovens aprendizes sobre qualidade e meio ambiente, com propostas de melhoria. Todos os números saem de consultas SQL a um banco de dados que roda no próprio navegador.
 
-1. **Brasil:** as emissões de CO₂ subiram 119,8% entre 1990 e 2022, mas o PIB subiu 168,9%. A intensidade de carbono (indicador 9.4.1 dos ODS) caiu 17,9%.
-2. **Mundo:** os 10 maiores emissores somam 70,5% do CO₂. O Brasil é o 12º em volume, mas emite 2,29 t por habitante, menos da metade da média mundial (4,67 t).
-3. **PIB e CO₂:** regressão linear ŷ = 136,58x + 76,88 (r = 0,976), com um simulador de cenários.
-4. **Qualidade na prática:** pesquisa com jovens aprendizes do Centro de Formação SENAI/Mercedes-Benz, seis propostas de melhoria baseadas na ISO 9001 e na ISO 14001 e metas.
+O site está dividido assim:
 
-Logo abaixo da manchete, um **painel-resumo** mostra os quatro números principais. O **comparador** permite escolher um país (ou usar os atalhos) e um indicador, ver os dados em tabela, baixar em CSV, copiar um link que abre a mesma comparação e conferir a consulta SQL executada.
+- **Brasil:** de 1990 a 2022 o PIB subiu 168,9% e as emissões de CO₂ subiram 119,8%. Por isso, cada dólar produzido passou a emitir 17,9% menos carbono (indicador 9.4.1 dos ODS). O pico das emissões foi em 2014.
+- **Mundo, em volume:** os 10 maiores emissores somam 70,5% do CO₂; o Brasil é o 12º, com 1,3% do total.
+- **Mundo, por habitante:** o brasileiro emite 2,29 t por ano, menos da metade da média mundial (4,67 t).
+- **PIB e CO₂:** regressão linear ŷ = 136,58x + 76,88 (r = 0,976) e um simulador de cenários.
+- **Índice de alerta:** nota de 0 a 100 que aponta quais países tendem a ter problemas para cumprir metas de emissão (detalhes abaixo).
+- **Comparar:** o Brasil ao lado de outro país, em quatro indicadores, com tabela, CSV e link.
+- **Qualidade na prática:** pesquisa com 10 jovens aprendizes do Centro de Formação SENAI/Mercedes-Benz, seis propostas baseadas na ISO 9001 e na ISO 14001 e metas.
+- **Consultas:** consultas prontas ao banco, escolhidas por filtros.
 
 ## Consultar o banco de dados
 
-- **No site:** a seção **Banco de dados** tem um console em que qualquer pessoa digita um `SELECT` e vê o resultado na hora, com exemplos prontos e a lista de tabelas e colunas.
+- **No site:** a seção **Consultas** oferece consultas prontas (série histórica de um país, ranking por indicador, países por nível de alerta, respostas da pesquisa e propostas). O usuário só escolhe opções em listas; cada valor é conferido contra a lista permitida e enviado ao banco como parâmetro, nunca colado no texto do SQL. Não existe campo para digitar SQL, o que elimina o risco de injeção de SQL. O site mostra a consulta executada, os parâmetros e a lista de tabelas e colunas.
 - **No computador:** baixe `app/data/projeto_ods.sqlite` e abra no [DB Browser for SQLite](https://sqlitebrowser.org/) (aba *Executar SQL*).
 - **No MySQL:** execute `database/mysql/projeto_ods_mpv.sql` no MySQL Workbench e use as consultas de `database/mysql/consultas_analise.sql`.
 
@@ -34,11 +38,11 @@ app/                      Aplicação web (front-end) publicada no GitHub Pages
   js/app.js               Consultas SQL, estatística e gráficos
   data/projeto_ods.sqlite Banco de dados consultado no navegador
   vendor/                 sql.js (SQLite em WebAssembly) e Chart.js
-  fonts/                  Archivo e Source Serif 4 (licença OFL)
 dados_tratados/           Todos os dados tratados em CSV (um arquivo por tabela e recortes das análises)
 database/
   etl/gerar_banco.py      ETL: gera o SQLite e o script MySQL a partir dos dados brutos
   etl/exportar_csv.py     Exporta os CSV tratados e reconstrói o banco a partir deles
+  indice_alerta.sql       Cria a tabela do índice de alerta (SQLite e MySQL)
   projeto_ods_tratado.sqlite     Banco SQLite montado só com os CSV tratados
   mysql/carregar_dados_tratados.sql  Cria o banco no MySQL e carrega os CSV (LOAD DATA)
   mysql/projeto_ods_mpv.sql      Script MySQL documentado (criação e carga)
@@ -50,7 +54,7 @@ analise/
   gerar_planilha_dashboard.py    Gera a planilha inteligente com dashboard (Excel)
   dados_brutos/                  CSVs do Our World in Data e da pesquisa (anônima)
   saida/                         Gráficos e resultados gerados
-docs/                     Documento centralizado, artigo, relatórios (Word e PDF) e planilha com dashboard (Excel)
+docs/                     Planilha inteligente com dashboard (Excel)
 .github/workflows/pages.yml  Publicação automática da pasta app/
 ```
 
@@ -81,11 +85,20 @@ mysql -u root < database/mysql/projeto_ods_mpv.sql
 mysql -u root -t < database/mysql/consultas_analise.sql
 ```
 
-## Publicar no GitHub Pages
+## Índice de alerta: conclusão prática
 
-1. No repositório, abra **Settings → Pages**.
-2. Em **Build and deployment → Source**, escolha **GitHub Actions**.
-3. Faça um push na branch `main` (ou rode o workflow manualmente em **Actions**). O endereço aparece em Settings → Pages.
+Para transformar os dados em orientação, o banco calcula a tabela `indice_alerta` (arquivo `database/indice_alerta.sql`, que roda igual no SQLite e no MySQL 8). Para 153 países com pelo menos 1 milhão de habitantes, ela combina quatro sinais:
+
+| Sinal | Peso | Por quê |
+|---|---|---|
+| Variação das emissões de 2012 a 2022 | 35% | quem ainda está aumentando tem mais dificuldade de cumprir metas |
+| CO₂ por habitante em 2022 | 25% | consumo alto de energia fóssil por pessoa |
+| Intensidade de carbono em 2022 | 25% | economia que depende muito de carbono para gerar riqueza |
+| Parcela do CO₂ que vem do petróleo | 15% | dependência de combustíveis, difícil de trocar rápido |
+
+Cada sinal vira uma nota de 0 a 100 pela posição do país entre os demais (`PERCENT_RANK`). O índice é a média ponderada das notas: 70 ou mais é alerta alto, de 40 a 69,9 é moderado e abaixo de 40 é baixo. A mesma tabela traz uma projeção para 2030 pela reta de mínimos quadrados de 2012 a 2022, calculada no próprio SQL.
+
+Resultado: 9 países em alerta alto, 119 moderado e 25 baixo. O Brasil fica com 41,3 (moderado, 127º de 153). As emissões caíram nos últimos dez anos e a intensidade é baixa, mas a nota de dependência de petróleo é 69,1. A orientação é priorizar transporte e combustíveis. As consultas Q11 a Q15 de `database/mysql/consultas_analise.sql` exploram o índice.
 
 ## Planilha inteligente com dashboard
 
@@ -100,13 +113,14 @@ mysql -u root -t < database/mysql/consultas_analise.sql
 | `pesquisa_resposta` | 10 respostas anônimas do checklist ambiental e de qualidade (1 = Sim) | `id_resposta` |
 | `acao_melhoria` | Propostas de melhoria com requisitos da ISO 9001 e da ISO 14001 | `id_acao` |
 | `meta_indicador` | Metas dos resultados esperados | `id_meta` |
+| `indice_alerta` | Índice de alerta por país, notas dos quatro sinais e projeção para 2030 (dado derivado) | `iso_code` |
 
 Visões: `vw_emissao` (emissões com nome do país) e `vw_indices_pesquisa` (IPA e IGQ por respondente). O dicionário de dados completo está em [`database/README.md`](database/README.md).
 
 ## Storytelling com dados e leis da UX
 
 - **Storytelling com dados:** títulos que afirmam a conclusão do gráfico, um gráfico por mensagem, cor só onde importa (o Brasil em verde, o resto em cinza), rótulos diretos no lugar de legendas, eliminação de bordas e grades desnecessárias e uma narrativa com começo (contexto), meio (tensão: desigualdade e dependência do PIB) e fim (o que fazer).
-- **Leis da UX aplicadas:** Jakob (layout conhecido), Hick (cinco itens no menu e três opções de indicador), Miller (até quatro números por grupo), Fitts (alvos de pelo menos 44 px), Von Restorff (Brasil destacado), proximidade e região comum da Gestalt (rótulo colado ao número), limiar de Doherty (consultas locais em menos de 400 ms) e regra do pico-final (fechamento com chamada à ação).
+- **Leis da UX aplicadas:** Jakob (layout conhecido), Hick (poucos itens no menu e quatro opções de indicador), Miller (até quatro números por grupo), Fitts (alvos de pelo menos 44 px), Von Restorff (Brasil destacado), proximidade e região comum da Gestalt (rótulo colado ao número), limiar de Doherty (consultas locais em menos de 400 ms) e regra do pico-final (fechamento com chamada à ação).
 
 ## Fontes dos dados
 

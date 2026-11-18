@@ -45,15 +45,15 @@
 +-----------------+-----------+----------------+----------------------+---------+
 | China           | 11695.013 |          8.206 |               31.211 |       1 |
 | Estados Unidos  |  5065.986 |         14.833 |               13.520 |       2 |
-| Índia          |  2821.410 |          1.979 |                7.530 |       3 |
-| Rússia         |  1676.352 |         11.515 |                4.474 |       4 |
-| Japão          |  1027.559 |          8.221 |                2.742 |       5 |
-| Irã            |   782.288 |          8.738 |                2.088 |       6 |
-| Indonésia      |   751.755 |          2.696 |                2.006 |       7 |
+| Índia           |  2821.410 |          1.979 |                7.530 |       3 |
+| Rússia          |  1676.352 |         11.515 |                4.474 |       4 |
+| Japão           |  1027.559 |          8.221 |                2.742 |       5 |
+| Irã             |   782.288 |          8.738 |                2.088 |       6 |
+| Indonésia       |   751.755 |          2.696 |                2.006 |       7 |
 | Alemanha        |   670.017 |          7.968 |                1.788 |       8 |
-| Arábia Saudita |   610.304 |         18.968 |                1.629 |       9 |
+| Arábia Saudita  |   610.304 |         18.968 |                1.629 |       9 |
 | Coreia do Sul   |   606.929 |         11.721 |                1.620 |      10 |
-| Canadá         |   545.727 |         14.057 |                1.456 |      11 |
+| Canadá          |   545.727 |         14.057 |                1.456 |      11 |
 | Brasil          |   480.648 |          2.285 |                1.283 |      12 |
 +-----------------+-----------+----------------+----------------------+---------+
 +-----------+--------+------+---------+-------------+------------+
@@ -70,20 +70,81 @@
 | indicador                                         | atual | meta   | unidade |
 +---------------------------------------------------+-------+--------+---------+
 | Reconhecimento do uso de ferramentas da qualidade | 20.00 |  70.00 | %       |
-| Percepção de desperdício visível de materiais | 60.00 |  30.00 | %       |
-| Percepção de controle do consumo de água       | 50.00 |  80.00 | %       |
-| Percepção de controle do consumo de energia     | 70.00 |  90.00 | %       |
-| Orientação ambiental aos aprendizes             | 90.00 | 100.00 | %       |
-| Índice de Práticas Ambientais (IPA, 0 a 9)      |  7.40 |   8.30 | pontos  |
-| Índice de Gestão da Qualidade (IGQ, 0 a 3)      |  2.10 |   2.60 | pontos  |
+| Percepção de desperdício visível de materiais     | 60.00 |  30.00 | %       |
+| Percepção de controle do consumo de água          | 50.00 |  80.00 | %       |
+| Percepção de controle do consumo de energia       | 70.00 |  90.00 | %       |
+| Orientação ambiental aos aprendizes               | 90.00 | 100.00 | %       |
+| Índice de Práticas Ambientais (IPA, 0 a 9)        |  7.40 |   8.30 | pontos  |
+| Índice de Gestão da Qualidade (IGQ, 0 a 3)        |  2.10 |   2.60 | pontos  |
 +---------------------------------------------------+-------+--------+---------+
 +---------+-----------------------------------------------------+----------------------------------------------------------------------------------------------------------+-----------------------+
 | id_acao | problema                                            | proposta                                                                                                 | prazo                 |
 +---------+-----------------------------------------------------+----------------------------------------------------------------------------------------------------------+-----------------------+
-|       1 | Baixo reconhecimento das ferramentas da qualidade   | Módulo prático de ferramentas da qualidade (NAPCD, PDCA, 5S, Ishikawa) no programa de aprendizagem     | Fev. a jun. 2027      |
-|       2 | Baixa percepção do controle de água e energia    | Painéis de gestão à vista com consumo de água, energia e resíduos por setor, usados também em aula | Fev. 2027             |
-|       3 | Desperdício visível de materiais                  | Programa Caça ao Desperdício e abastecimento dos postos por kits                                       | Mar. a jun. 2027      |
-|       4 | Placas desgastadas e respingos de óleo no descarte | 5S nos pontos de descarte, placas resistentes a óleo, bandejas de contenção e funis com tampa         | A partir de mar. 2027 |
-|       5 | Vazamentos de água, óleo e ar comprimido          | Rotas de inspeção, etiquetas de identificação e prazo para correção de vazamentos                  | Fev. a abr. 2027      |
-|       6 | Diferença entre controles existentes e percepção | Reaplicação semestral da pesquisa com cada turma e acompanhamento do IPA e do IGQ                      | Semestral             |
+|       1 | Baixo reconhecimento das ferramentas da qualidade   | Módulo prático de ferramentas da qualidade (NAPCD, PDCA, 5S, Ishikawa) no programa de aprendizagem       | Fev. a jun. 2027      |
+|       2 | Baixa percepção do controle de água e energia       | Painéis de gestão à vista com consumo de água, energia e resíduos por setor, usados também em aula       | Fev. 2027             |
+|       3 | Desperdício visível de materiais                    | Programa Caça ao Desperdício e abastecimento dos postos por kits                                         | Mar. a jun. 2027      |
+|       4 | Placas desgastadas e respingos de óleo no descarte  | 5S nos pontos de descarte, placas resistentes a óleo, bandejas de contenção e funis com tampa            | A partir de mar. 2027 |
+|       5 | Vazamentos de água, óleo e ar comprimido            | Rotas de inspeção, etiquetas de identificação e prazo para correção de vazamentos                        | Fev. a abr. 2027      |
+|       6 | Diferença entre controles existentes e percepção    | Reaplicação semestral da pesquisa com cada turma e acompanhamento do IPA e do IGQ                        | Semestral             |
 +---------+-----------------------------------------------------+----------------------------------------------------------------------------------------------------------+-----------------------+
++----------------+-----------------+---------------+--------------+-------------------------------+
+| posicao_alerta | nome_pt         | indice_alerta | nivel_alerta | principal_sinal               |
++----------------+-----------------+---------------+--------------+-------------------------------+
+|              1 | Mongólia        |          80.2 | Alto         | emissões crescendo            |
+|              2 | Iraque          |          75.9 | Alto         | emissões crescendo            |
+|              3 | Mauritânia      |          74.6 | Alto         | emissões crescendo            |
+|              4 | Barein          |          74.4 | Alto         | muito CO2 por habitante       |
+|              5 | Arábia Saudita  |          73.1 | Alto         | muito CO2 por habitante       |
+|              6 | Turcomenistão   |          71.9 | Alto         | economia intensiva em carbono |
+|              7 | Kuwait          |          71.7 | Alto         | muito CO2 por habitante       |
+|              8 | Irã             |          70.4 | Alto         | economia intensiva em carbono |
+|              9 | Laos            |          70.2 | Alto         | emissões crescendo            |
+|             10 | Camboja         |          68.7 | Moderado     | emissões crescendo            |
++----------------+-----------------+---------------+--------------+-------------------------------+
++--------------+--------+--------------+
+| nivel_alerta | paises | indice_medio |
++--------------+--------+--------------+
+| Alto         |      9 |         73.6 |
+| Moderado     |    119 |         51.6 |
+| Baixo        |     25 |         33.3 |
++--------------+--------+--------------+
++---------+----------------+--------------+----------------+-----------------+------------------+---------------+---------------+--------------+----------+-------------------+
+| nome_pt | posicao_alerta | total_paises | nota_tendencia | nota_per_capita | nota_intensidade | nota_petroleo | indice_alerta | nivel_alerta | co2_2022 | projecao_co2_2030 |
++---------+----------------+--------------+----------------+-----------------+------------------+---------------+---------------+--------------+----------+-------------------+
+| Brasil  |            127 |          153 |           33.6 |            46.1 |             30.9 |          69.1 |          41.3 | Moderado     |  480.648 |           431.440 |
++---------+----------------+--------------+----------------+-----------------+------------------+---------------+---------------+--------------+----------+-------------------+
++-----------------+-----------+-------------------+---------------------+
+| nome_pt         | co2_2022  | projecao_co2_2030 | aumento_previsto_mt |
++-----------------+-----------+-------------------+---------------------+
+| China           | 11695.013 |         13070.024 |              1375.0 |
+| Índia           |  2821.410 |          3474.551 |               653.1 |
+| Indonésia       |   751.755 |           927.019 |               175.3 |
+| Vietnã          |   323.369 |           498.193 |               174.8 |
+| Irã             |   782.288 |           936.403 |               154.1 |
+| Arábia Saudita  |   610.304 |           717.050 |               106.7 |
+| Paquistão       |   205.521 |           287.176 |                81.7 |
+| Turquia         |   445.118 |           523.618 |                78.5 |
+| Iraque          |   229.497 |           288.115 |                58.6 |
+| Filipinas       |   149.477 |           198.556 |                49.1 |
++-----------------+-----------+-------------------+---------------------+
++-------------------------+---------------------+----------------+
+| nome_pt                 | variacao_10anos_pct | co2_per_capita |
++-------------------------+---------------------+----------------+
+| Mongólia                |              131.18 |         10.409 |
+| Iraque                  |               52.94 |          5.207 |
+| Barein                  |               37.96 |         25.290 |
+| Malásia                 |               32.71 |          8.206 |
+| Turcomenistão           |               31.10 |         12.250 |
+| Irã                     |               30.44 |          8.738 |
+| Catar                   |               25.45 |         35.771 |
+| Turquia                 |               24.21 |          5.113 |
+| Omã                     |               24.05 |         16.491 |
+| China                   |               18.75 |          8.206 |
+| Arábia Saudita          |               18.31 |         18.968 |
+| Emirados Árabes Unidos  |               13.28 |         20.811 |
+| Cazaquistão             |               11.86 |         13.694 |
+| Kuwait                  |                8.94 |         22.838 |
+| Singapura               |                5.44 |          8.921 |
+| Sérvia                  |                2.05 |          6.619 |
+| Taiwan                  |                0.26 |         11.699 |
++-------------------------+---------------------+----------------+

@@ -5,7 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Carbono e riqueza: o que os dados abertos contam sobre o Brasil</title>
 <meta name="description" content="Relatório estatístico de dados abertos sobre emissões de CO2, PIB e gestão da qualidade. Projeto de Extensão – Fatec São Bernardo do Campo.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%231f2b30%22/%3E%3Cpath d=%22M5 10 L13 14 L19 12 L27 22%22 stroke=%22%230e7a5a%22 stroke-width=%224%22 fill=%22none%22/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%231f2b30%22/%3E%3Cpath d=%22M5 24 L12 17 L18 20 L27 8%22 stroke=%22%2334c08f%22 stroke-width=%224%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 fill=%22none%22/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -16,12 +19,13 @@
     <a class="marca" href="#inicio">Carbono e riqueza</a>
     <nav aria-label="Seções do relatório">
       <ul>
-        <li><a href="#cap1">Brasil</a></li>
-        <li><a href="#cap2">Mundo</a></li>
-        <li><a href="#cap3">PIB e CO<sub>2</sub></a></li>
-        <li><a href="#explorar">Explorar</a></li>
+        <li><a href="#brasil">Brasil</a></li>
+        <li><a href="#mundo">Mundo</a></li>
+        <li><a href="#pib">PIB e CO<sub>2</sub></a></li>
+        <li><a href="#alerta">Alertas</a></li>
+        <li><a href="#comparar">Comparar</a></li>
         <li><a href="#qualidade">Qualidade</a></li>
-        <li><a href="#banco">Banco de dados</a></li>
+        <li><a href="#consultas">Consultas</a></li>
       </ul>
     </nav>
   </div>
@@ -29,69 +33,78 @@
 
 <main id="conteudo">
 
+<!-- ===================== Abertura ===================== -->
 <section id="inicio" class="abertura">
-  <div class="coluna">
-    <p class="contexto">Relatório estatístico de dados abertos sobre o Brasil, de 1990 a 2022</p>
+  <div class="conteudo">
     <h1>O Brasil gera mais riqueza com menos carbono por dólar. Mas ainda não o suficiente.</h1>
-    <p class="lead">Entre 1990 e 2022, o PIB brasileiro cresceu <strong id="h-pib">…</strong> e as emissões de CO<sub>2</sub>, <strong id="h-co2">…</strong>. Cada dólar de riqueza passou a carregar <strong id="h-int">…</strong> menos carbono. Este relatório mostra como chegamos aqui, onde o Brasil está no mundo e o que a sua escola, empresa ou bairro pode fazer com essa informação.</p>
-  </div>
-  <figure class="faixa-grafico" aria-labelledby="leg-abertura">
-    <div class="altura-abertura"><canvas id="g-abertura" role="img" aria-label="Linha da intensidade de carbono do Brasil caindo de 0,184 em 1990 para 0,151 em 2022"></canvas></div>
-    <figcaption id="leg-abertura">Quilos de CO<sub>2</sub> emitidos para cada dólar internacional de PIB (indicador 9.4.1 dos ODS)</figcaption>
-  </figure>
-  <div class="coluna estado" id="estado" role="status">Carregando o banco de dados…</div>
-  <div class="painel" aria-label="Resumo em quatro números">
-    <dl class="painel-in" id="painel"></dl>
+    <p class="lead">Entre 1990 e 2022, o PIB brasileiro cresceu <strong id="h-pib">…</strong> e as emissões de CO<sub>2</sub> cresceram menos, <strong id="h-co2">…</strong>. Por isso, cada dólar produzido passou a carregar <strong id="h-int">…</strong> menos carbono. O gráfico mostra as três trajetórias a partir do mesmo ponto de partida.</p>
+    <figure class="cartao" aria-labelledby="leg-abertura">
+      <figcaption id="leg-abertura">Crescimento desde 1990 (1990 = 100)</figcaption>
+      <div class="altura-abertura"><canvas id="g-abertura" role="img" aria-label="PIB e emissões sobem desde 1990, o PIB mais rápido; o CO2 por dólar cai"></canvas></div>
+      <p class="legenda-leitura">Quando a linha do PIB sobe mais que a das emissões, a linha do CO<sub>2</sub> por dólar desce. Descer, aqui, é bom.</p>
+    </figure>
+    <p class="estado" id="estado" role="status">Carregando o banco de dados…</p>
+    <dl class="painel" id="painel" aria-label="Resumo em quatro números"></dl>
   </div>
 </section>
 
-<section id="cap1" class="capitulo">
-  <div class="coluna">
-    <p class="num-cap">Capítulo 1</p>
+<!-- ===================== Brasil ===================== -->
+<section id="brasil" class="capitulo">
+  <div class="conteudo">
     <h2>As emissões dobraram, mas cresceram mais devagar que a economia</h2>
-    <p>As emissões do Brasil passaram de <span data-k="co2_90"></span> Mt em 1990 para <span data-k="co2_22"></span> Mt em 2022, com pico em 2014. A intensidade de carbono, que mede quanto CO<sub>2</sub> a economia emite para gerar riqueza, caiu no mesmo período. Essa queda é o sinal que a meta 9.4 dos Objetivos de Desenvolvimento Sustentável procura.</p>
-  </div>
-  <div class="dupla">
-    <figure><figcaption>Emissões de CO<sub>2</sub> (milhões de toneladas)</figcaption><canvas id="g-co2" height="220" role="img" aria-label="Emissões de CO2 do Brasil de 1990 a 2022"></canvas></figure>
-    <figure><figcaption>Intensidade de carbono (kg de CO<sub>2</sub> por int-$): <span class="destaque" data-k="var_int"></span> desde 1990</figcaption><canvas id="g-int" height="220" role="img" aria-label="Intensidade de carbono do Brasil de 1990 a 2022"></canvas></figure>
-  </div>
-  <div class="coluna">
+    <p class="texto">As emissões do Brasil passaram de <span data-k="co2_90"></span> Mt em 1990 para <span data-k="co2_22"></span> Mt em 2022. O ano de 2014 marca a virada: foi o pico das emissões e, a partir dele, a intensidade de carbono, que mede quanto CO<sub>2</sub> a economia emite para gerar riqueza, voltou a cair. Essa queda é o que a meta 9.4 dos Objetivos de Desenvolvimento Sustentável procura.</p>
+    <div class="dupla">
+      <figure class="cartao"><figcaption>Emissões de CO<sub>2</sub> (milhões de toneladas)</figcaption><canvas id="g-co2" height="230" role="img" aria-label="Emissões de CO2 do Brasil de 1990 a 2022, com pico em 2014"></canvas></figure>
+      <figure class="cartao"><figcaption>Intensidade de carbono (kg de CO<sub>2</sub> por int-$): <span class="destaque" data-k="var_int"></span> desde 1990</figcaption><canvas id="g-int" height="230" role="img" aria-label="Intensidade de carbono do Brasil de 1990 a 2022, com 2014 marcado"></canvas></figure>
+    </div>
     <dl class="numeros" id="kpi-br"></dl>
-    <details class="sql"><summary>Ver a consulta SQL deste capítulo</summary><pre id="sql-cap1"></pre></details>
+    <details class="sql"><summary>Ver as consultas SQL desta seção</summary><pre id="sql-brasil"></pre></details>
   </div>
 </section>
 
-<section id="cap2" class="capitulo">
-  <div class="coluna">
-    <p class="num-cap">Capítulo 2</p>
-    <h2>Poucos países emitem muito; a maioria emite pouco</h2>
-    <p>Em 2022, os dez maiores emissores somaram <span data-k="top10"></span> de todo o CO<sub>2</sub>. O Brasil é o <span data-k="rank"></span> maior em volume, mas cada brasileiro emite <span data-k="br_pc"></span> t por ano, menos da metade da média mundial (<span data-k="mundo_pc"></span> t). A diferença vem da eletricidade: <span data-k="renov"></span> da energia elétrica brasileira é renovável.</p>
-  </div>
-  <div class="dupla">
-    <figure><figcaption>Os 12 maiores emissores em 2022 (milhões de toneladas)</figcaption><canvas id="g-top" height="300" role="img" aria-label="Ranking dos maiores emissores com o Brasil em 12º"></canvas></figure>
-    <figure><figcaption>Quantos países emitem cada faixa de CO<sub>2</sub> por habitante (t/pessoa, 2022)</figcaption><canvas id="g-hist" height="300" role="img" aria-label="Histograma: 147 dos 218 países emitem menos de 5 toneladas por habitante"></canvas></figure>
-  </div>
-  <div class="coluna">
-    <p class="nota">Índice de Gini das emissões por habitante entre os países: <strong data-k="gini"></strong>. Quanto mais perto de 1, mais desigual.</p>
-    <details class="sql"><summary>Ver a consulta SQL deste capítulo</summary><pre id="sql-cap2"></pre></details>
+<!-- ===================== Mundo: volume ===================== -->
+<section id="mundo" class="capitulo">
+  <div class="conteudo">
+    <h2>Em volume, o Brasil é o <span data-k="rank"></span> maior emissor do mundo</h2>
+    <p class="texto">Em 2022, o Brasil emitiu <span data-k="br_mt"></span> Mt de CO<sub>2</sub>, <span data-k="br_share"></span> do total mundial. Os dez maiores emissores somam <span data-k="top10"></span>, e só a China responde por <span data-k="chn_share"></span>. Ao longo de 30 anos, a participação brasileira mudou pouco.</p>
+    <div class="dupla">
+      <figure class="cartao"><figcaption>Os 12 maiores emissores em 2022 (Mt)</figcaption><canvas id="g-top" height="300" role="img" aria-label="Ranking dos 12 maiores emissores com o Brasil destacado"></canvas></figure>
+      <figure class="cartao"><figcaption>Participação do Brasil nas emissões mundiais (%)</figcaption><canvas id="g-share" height="300" role="img" aria-label="Participação do Brasil nas emissões mundiais de 1990 a 2022"></canvas></figure>
+    </div>
+    <dl class="numeros" id="kpi-volume"></dl>
+    <details class="sql"><summary>Ver as consultas SQL desta seção</summary><pre id="sql-volume"></pre></details>
   </div>
 </section>
 
-<section id="cap3" class="capitulo">
-  <div class="coluna">
-    <p class="num-cap">Capítulo 3</p>
+<!-- ===================== Mundo: por habitante ===================== -->
+<section id="habitante" class="capitulo">
+  <div class="conteudo">
+    <h2>Por habitante, o brasileiro emite menos da metade da média mundial</h2>
+    <p class="texto">Cada brasileiro emitiu <span data-k="br_pc"></span> t de CO<sub>2</sub> em 2022, contra <span data-k="mundo_pc"></span> t da média mundial. A diferença vem da eletricidade: <span data-k="renov"></span> da energia elétrica brasileira é renovável, contra <span data-k="renov_mundo"></span> no mundo. Entre os países, a desigualdade é grande: a maioria emite pouco, e poucos emitem muito.</p>
+    <div class="dupla">
+      <figure class="cartao"><figcaption>Quantos países emitem cada faixa de CO<sub>2</sub> por habitante (t/pessoa, 2022)</figcaption><canvas id="g-hist" height="290" role="img" aria-label="Histograma: a maioria dos países emite menos de 5 toneladas por habitante"></canvas></figure>
+      <figure class="cartao"><figcaption>Os 10 maiores emissores por habitante, o mundo e o Brasil (t/pessoa, 2022)</figcaption><canvas id="g-toppc" height="290" role="img" aria-label="Ranking das maiores emissões por habitante, com o mundo e o Brasil"></canvas></figure>
+    </div>
+    <dl class="numeros" id="kpi-hab"></dl>
+    <details class="sql"><summary>Ver as consultas SQL desta seção</summary><pre id="sql-hab"></pre></details>
+  </div>
+</section>
+
+<!-- ===================== PIB e CO2 ===================== -->
+<section id="pib" class="capitulo">
+  <div class="conteudo">
     <h2>Quando o PIB sobe, o carbono acompanha. Até 2014.</h2>
-    <p>A regressão linear entre PIB e emissões do Brasil mostra uma relação muito forte: <span data-k="eq"></span>, com r = <span data-k="r"></span>. Ou seja, cada trilhão de dólares a mais no PIB veio, em média, com <span data-k="a"></span> Mt a mais de CO<sub>2</sub>. Depois de 2014, porém, os pontos ficam abaixo da reta: o País cresceu sem voltar ao pico de emissões.</p>
-  </div>
-  <figure class="largo"><figcaption>PIB (trilhões de int-$ de 2011) e emissões de CO<sub>2</sub> (Mt), um ponto por ano. <span class="destaque">Em verde, os anos depois de 2014, abaixo da reta.</span></figcaption><canvas id="g-reg" height="150" role="img" aria-label="Dispersão entre PIB e emissões com reta de regressão"></canvas></figure>
-  <div class="coluna">
-    <div class="simulador" aria-labelledby="sim-titulo">
+    <p class="texto">A regressão linear entre PIB e emissões do Brasil mostra uma relação muito forte: <span data-k="eq"></span>, com r = <span data-k="r"></span>. Cada trilhão de dólares a mais no PIB veio, em média, com <span data-k="a"></span> Mt a mais de CO<sub>2</sub>. Depois de 2014, porém, os pontos ficam abaixo da reta: o País cresceu sem voltar ao pico de emissões.</p>
+    <figure class="cartao"><figcaption>PIB (trilhões de int-$ de 2011) e emissões de CO<sub>2</sub> (Mt), um ponto por ano. <span class="destaque">Em verde, os anos depois de 2014.</span></figcaption><canvas id="g-reg" height="140" role="img" aria-label="Dispersão entre PIB e emissões com reta de regressão"></canvas></figure>
+    <div class="simulador cartao" aria-labelledby="sim-titulo">
       <h3 id="sim-titulo">E se o PIB crescer?</h3>
-      <p>Escolha um PIB futuro e quanto a intensidade de carbono pode cair em relação a 2022. O simulador compara o resultado com a tendência histórica e com as emissões de 2022.</p>
-      <label for="sim-pib">PIB do Brasil: <output id="sim-pib-out">4,0</output> trilhões de int-$</label>
-      <input type="range" id="sim-pib" min="3.2" max="5" step="0.1" value="4">
-      <label for="sim-red">Redução da intensidade de carbono: <output id="sim-red-out">10</output>%</label>
-      <input type="range" id="sim-red" min="0" max="40" step="1" value="10">
+      <p class="texto">Escolha um PIB futuro e quanto a intensidade de carbono pode cair em relação a 2022. O simulador compara o resultado com a tendência histórica e com as emissões de 2022.</p>
+      <div class="controles-sim">
+        <div><label for="sim-pib">PIB do Brasil: <output id="sim-pib-out">4,0</output> trilhões de int-$</label>
+        <input type="range" id="sim-pib" min="3.2" max="5" step="0.1" value="4"></div>
+        <div><label for="sim-red">Redução da intensidade de carbono: <output id="sim-red-out">10</output>%</label>
+        <input type="range" id="sim-red" min="0" max="40" step="1" value="10"></div>
+      </div>
       <dl class="numeros tres">
         <div><dt>Pela tendência histórica</dt><dd id="sim-reg">–</dd></div>
         <div class="br"><dt>Com a redução escolhida</dt><dd id="sim-int">–</dd></div>
@@ -99,14 +112,36 @@
       </dl>
       <p class="nota" id="sim-dif"></p>
     </div>
-    <details class="sql"><summary>Ver a consulta SQL da regressão</summary><pre id="sql-cap3"></pre></details>
+    <details class="sql"><summary>Ver a consulta SQL da regressão</summary><pre id="sql-pib"></pre></details>
   </div>
 </section>
 
-<section id="explorar" class="capitulo explorar">
-  <div class="coluna">
+<!-- ===================== Índice de alerta ===================== -->
+<section id="alerta" class="capitulo">
+  <div class="conteudo">
+    <h2>Onde estão os problemas futuros: o índice de alerta</h2>
+    <p class="texto">Para transformar os dados em orientação, o banco calcula um índice de alerta de 0 a 100 para <span data-k="n_alerta"></span> países. Ele combina quatro sinais com pesos diferentes: emissões crescendo nos últimos dez anos (35%), CO<sub>2</sub> por habitante (25%), intensidade de carbono (25%) e dependência de petróleo (15%). Cada sinal vira uma nota pela posição do país entre os demais. Quanto maior o índice, maior a chance de o país enfrentar problemas para cumprir metas de emissão.</p>
+    <dl class="numeros" id="kpi-alerta"></dl>
+    <div class="dupla">
+      <figure class="cartao"><figcaption>Os 15 países com maior índice de alerta. <span class="nivel alto">Alto</span> 70 ou mais; <span class="nivel moderado">moderado</span> de 40 a 69,9</figcaption><canvas id="g-alerta" height="340" role="img" aria-label="Ranking dos 15 países com maior índice de alerta"></canvas></figure>
+      <figure class="cartao"><figcaption>Brasil: nota de cada sinal (0 a 100; quanto maior, pior)</figcaption><canvas id="g-alerta-br" height="340" role="img" aria-label="Notas do Brasil em cada sinal do índice de alerta"></canvas></figure>
+    </div>
+    <div class="orientacao cartao">
+      <h3>O que o índice diz sobre o Brasil</h3>
+      <p class="texto" id="txt-alerta-br"></p>
+      <h3>Quem mais deve aumentar as emissões até 2030</h3>
+      <p class="texto">Projeção simples pela tendência de 2012 a 2022, calculada no próprio banco com a reta dos mínimos quadrados de cada país.</p>
+      <div class="tabela-rolagem"><table id="tab-projecao"></table></div>
+    </div>
+    <details class="sql"><summary>Ver as consultas SQL do índice</summary><pre id="sql-alerta"></pre></details>
+  </div>
+</section>
+
+<!-- ===================== Comparar ===================== -->
+<section id="comparar" class="capitulo fundo-claro">
+  <div class="conteudo">
     <h2>Compare o Brasil com outro país</h2>
-    <p>Escolha um país e um indicador. As consultas são feitas no banco de dados direto no seu navegador.</p>
+    <p class="texto">Escolha um país e um indicador. O filtro aceita apenas os países e indicadores da lista, e a consulta ao banco usa parâmetros.</p>
     <div class="controles">
       <label for="ex-pais">País</label>
       <select id="ex-pais"></select>
@@ -122,12 +157,12 @@
         <legend>Indicador</legend>
         <label><input type="radio" name="ex-ind" value="co2_per_capita" checked> <span>CO<sub>2</sub> por habitante</span></label>
         <label><input type="radio" name="ex-ind" value="co2_por_pib"> <span>Intensidade de carbono</span></label>
+        <label><input type="radio" name="ex-ind" value="indice_1990"> <span>Crescimento das emissões (1990 = 100)</span></label>
         <label><input type="radio" name="ex-ind" value="co2_mt"> <span>Emissões totais</span></label>
       </fieldset>
     </div>
-  </div>
-  <figure class="largo"><canvas id="g-ex" height="130" role="img" aria-label="Comparação entre o Brasil e o país escolhido"></canvas></figure>
-  <div class="coluna">
+    <figure class="cartao"><canvas id="g-ex" height="130" role="img" aria-label="Comparação entre o Brasil e o país escolhido"></canvas>
+      <p class="nota" id="ex-escala"></p></figure>
     <dl class="numeros" id="kpi-ex"></dl>
     <div class="acoes-ex">
       <button type="button" id="ex-link" class="botao">Copiar link desta comparação</button>
@@ -139,54 +174,75 @@
   </div>
 </section>
 
+<!-- ===================== Qualidade ===================== -->
 <section id="qualidade" class="capitulo">
-  <div class="coluna">
-    <p class="num-cap">Capítulo 4</p>
+  <div class="conteudo">
     <h2>Na prática: o que os jovens aprendizes enxergam na fábrica</h2>
-    <p>Para ligar os números globais ao dia a dia, foi feita uma pesquisa com 10 jovens aprendizes do Centro de Formação SENAI/Mercedes-Benz, em São Bernardo do Campo. A gestão de resíduos é forte, mas o controle de água e energia e as ferramentas da qualidade quase não aparecem para quem está aprendendo.</p>
-  </div>
-  <figure class="largo"><figcaption>Respostas “Sim” por pergunta (%, n = 10). Em grafite, os itens abaixo de 75%; em laranja, o único item negativo.</figcaption><canvas id="g-pesq" height="150" role="img" aria-label="Percentual de respostas sim na pesquisa com aprendizes"></canvas></figure>
-  <div class="coluna">
-    <h3>Seis melhorias propostas com base na ISO 9001 e na ISO 14001</h3>
-    <ol class="acoes" id="acoes"></ol>
-    <h3>Metas para o próximo semestre</h3>
-    <div class="metas" id="metas"></div>
+    <p class="texto">Para ligar os números ao dia a dia, foi feita uma pesquisa com 10 jovens aprendizes do Centro de Formação SENAI/Mercedes-Benz, em São Bernardo do Campo. A gestão de resíduos é forte, mas o controle de água e energia e as ferramentas da qualidade quase não aparecem para quem está aprendendo.</p>
+    <figure class="cartao"><figcaption>Respostas “Sim” por pergunta (%, n = 10). Em grafite, os itens abaixo de 75%; em laranja, o único item negativo.</figcaption><canvas id="g-pesq" height="150" role="img" aria-label="Percentual de respostas sim na pesquisa com aprendizes"></canvas></figure>
+    <div class="dupla texto-dupla">
+      <div>
+        <h3>Seis melhorias propostas com base na ISO 9001 e na ISO 14001</h3>
+        <ol class="acoes" id="acoes"></ol>
+      </div>
+      <div>
+        <h3>Metas para o próximo semestre</h3>
+        <div class="metas" id="metas"></div>
+      </div>
+    </div>
     <details class="sql"><summary>Ver as consultas SQL da pesquisa</summary><pre id="sql-q"></pre></details>
   </div>
 </section>
 
-<section id="banco" class="capitulo banco">
-  <div class="coluna">
+<!-- ===================== Consultas prontas ===================== -->
+<section id="consultas" class="capitulo fundo-claro">
+  <div class="conteudo">
     <h2>Consulte o banco de dados</h2>
-    <p>Escreva uma consulta SQL e veja o resultado. O banco roda no seu navegador (SQLite), com as mesmas tabelas do script MySQL do projeto. As consultas são feitas sobre uma cópia local, então nada é alterado no site.</p>
-    <div class="exemplos" role="group" aria-label="Consultas de exemplo">
-      <span>Exemplos:</span>
-      <button type="button" data-sql="tabelas">Tabelas e colunas</button>
-      <button type="button" data-sql="brasil">Brasil 1990–2022</button>
-      <button type="button" data-sql="top">Maiores emissores 2022</button>
-      <button type="button" data-sql="pesquisa">Pesquisa: % de Sim</button>
-      <button type="button" data-sql="acoes">Propostas de melhoria</button>
-    </div>
-    <label for="sql-editor" class="rotulo-sql">Consulta SQL</label>
-    <textarea id="sql-editor" spellcheck="false" rows="7"></textarea>
-    <div class="acoes-ex">
-      <button type="button" id="sql-rodar" class="botao">Executar consulta</button>
-      <span class="nota">Atalho: Ctrl + Enter</span>
-      <span id="sql-info" class="aviso" role="status" aria-live="polite"></span>
-    </div>
-    <div class="tabela-rolagem resultado"><table id="sql-resultado"></table></div>
-    <details class="sql"><summary>Ver todas as tabelas e colunas</summary><pre id="sql-esquema"></pre></details>
+    <p class="texto">Escolha uma consulta e os filtros. Os valores escolhidos são conferidos contra listas fechadas antes de chegar ao banco, que roda no seu navegador (SQLite) com as mesmas tabelas do script MySQL do projeto. Não é possível digitar SQL livre.</p>
+    <form id="form-consulta" class="form-consulta">
+      <div class="campo"><label for="c-tipo">Consulta</label>
+        <select id="c-tipo">
+          <option value="serie">Série histórica de um país</option>
+          <option value="ranking">Ranking dos países em um ano</option>
+          <option value="alerta">Países por nível de alerta</option>
+          <option value="pesquisa">Pesquisa com os aprendizes</option>
+          <option value="propostas">Propostas de melhoria e metas</option>
+        </select></div>
+      <div class="campo" data-para="serie"><label for="c-pais">País</label><select id="c-pais"></select></div>
+      <div class="campo" data-para="serie ranking"><label for="c-ind">Indicador</label>
+        <select id="c-ind">
+          <option value="co2_mt">Emissões totais (Mt)</option>
+          <option value="co2_per_capita">CO₂ por habitante (t)</option>
+          <option value="co2_por_pib">Intensidade de carbono (kg/int-$)</option>
+          <option value="participacao_mundial">Participação mundial (%)</option>
+          <option value="renovaveis_eletr">Eletricidade renovável (%)</option>
+        </select></div>
+      <div class="campo" data-para="serie"><label for="c-de">De</label><select id="c-de"></select></div>
+      <div class="campo" data-para="serie"><label for="c-ate">Até</label><select id="c-ate"></select></div>
+      <div class="campo" data-para="ranking"><label for="c-ano">Ano</label><select id="c-ano"></select></div>
+      <div class="campo" data-para="ranking"><label for="c-qtd">Quantidade</label>
+        <select id="c-qtd"><option>5</option><option selected>10</option><option>20</option></select></div>
+      <div class="campo" data-para="alerta"><label for="c-nivel">Nível de alerta</label>
+        <select id="c-nivel"><option>Alto</option><option selected>Moderado</option><option>Baixo</option></select></div>
+      <div class="campo botao-campo"><button type="submit" class="botao">Executar consulta</button></div>
+    </form>
+    <p id="c-info" class="aviso" role="status" aria-live="polite"></p>
+    <div class="tabela-rolagem resultado"><table id="c-resultado"></table></div>
+    <div class="acoes-ex"><button type="button" id="c-csv" class="botao secundario">Baixar resultado (CSV)</button></div>
+    <details class="sql" open><summary>Consulta SQL executada</summary><pre id="c-sql"></pre></details>
+    <details class="sql"><summary>Ver todas as tabelas e colunas do banco</summary><pre id="c-esquema"></pre></details>
   </div>
 </section>
 
+<!-- ===================== Fechamento ===================== -->
 <section id="agir" class="capitulo fechamento">
-  <div class="coluna">
+  <div class="conteudo">
     <h2>O que fazer com esses dados</h2>
     <ul class="usos">
-      <li><strong>Escolas e cursos técnicos:</strong> usar os gráficos e o comparador em aulas sobre clima, indústria e eficiência.</li>
-      <li><strong>Pequenas empresas e prestadores de serviço:</strong> acompanhar o próprio consumo de energia e combustível, como o País acompanha a intensidade de carbono.</li>
-      <li><strong>Poder público e associações de bairro:</strong> priorizar transporte e combustíveis, responsáveis por 66% das emissões fósseis do Brasil.</li>
-      <li><strong>Centros de formação:</strong> ensinar ferramentas da qualidade e leitura de indicadores desde o primeiro módulo.</li>
+      <li><strong>Poder público e associações de bairro:</strong> o sinal mais forte do Brasil no índice de alerta é a dependência de petróleo (<span data-k="br_pet"></span> das emissões). Transporte coletivo, frota mais eficiente e combustíveis renováveis são as ações com maior efeito.</li>
+      <li><strong>Pequenas empresas e prestadores de serviço:</strong> acompanhar o próprio consumo de energia e combustível por unidade produzida, como o País acompanha a intensidade de carbono, e usar o simulador para definir metas.</li>
+      <li><strong>Escolas e cursos técnicos:</strong> usar o comparador e as consultas prontas em aulas sobre clima, indústria e eficiência, e o índice de alerta para discutir quais países precisam de mais atenção.</li>
+      <li><strong>Centros de formação:</strong> ensinar ferramentas da qualidade e leitura de indicadores desde o primeiro módulo, como propõe o diagnóstico com os aprendizes.</li>
     </ul>
     <p class="final">Crescer sem aumentar o carbono já aconteceu depois de 2014. O desafio agora é transformar exceção em regra.</p>
     <p class="baixar"><a class="botao-claro" href="data/Planilha_Inteligente_Dashboard_ODS.xlsx" download>Baixar a planilha com o dashboard (Excel)</a></p>
@@ -196,7 +252,7 @@
 </main>
 
 <footer class="rodape">
-  <div class="coluna">
+  <div class="conteudo">
     <p><strong>Projeto de Extensão – 4º semestre</strong>, Informática para Negócios, Fatec São Bernardo do Campo – Adib Moisés Dib. Disciplinas: Banco de Dados, Programação, Estatística e Gestão da Qualidade. Autora: Thais Mendes da Silva.</p>
     <p>Dados: Our World in Data (Global Carbon Budget, Maddison Project Database e dados de energia), licença CC BY 4.0; pesquisa própria com aprendizes do SENAI/Mercedes-Benz (2º semestre de 2026). Código-fonte: <a href="https://github.com/thaisneve/projeto-extensao-ods">github.com/thaisneve/projeto-extensao-ods</a>.</p>
   </div>

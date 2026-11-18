@@ -6,7 +6,8 @@ Etapas:
   2) grava um CSV por tabela e por visão em dados_tratados/;
   3) recria um banco SQLite só com esses CSVs (database/projeto_ods_tratado.sqlite),
      para provar que os arquivos bastam para reconstruir o banco;
-  4) confere se as contagens e os totais são iguais nos dois bancos.
+  4) recalcula o índice de alerta (database/indice_alerta.sql) no banco novo;
+  5) confere se as contagens e os totais são iguais nos dois bancos.
 
 Uso (na raiz do repositório, depois de database/etl/gerar_banco.py):
     python database/etl/exportar_csv.py
@@ -28,6 +29,7 @@ TABELAS = ["pais", "emissao", "pesquisa_resposta", "acao_melhoria", "meta_indica
 
 # Recortes usados nas análises (gerados a partir das tabelas)
 RECORTES = {
+    "indice_alerta": "SELECT * FROM indice_alerta ORDER BY posicao_alerta",
     "vw_indices_pesquisa": "SELECT * FROM vw_indices_pesquisa ORDER BY id_resposta",
     "brasil_1990_2022": """
         SELECT ano, populacao, pib, co2_mt, co2_per_capita, co2_por_pib, co2_petroleo,
@@ -67,7 +69,7 @@ def main():
     # Recria o banco a partir dos CSV, com o mesmo modelo (DDL e visões do banco original)
     DESTINO.unlink(missing_ok=True)
     destino = sqlite3.connect(DESTINO)
-    for (ddl,) in origem.execute("SELECT sql FROM sqlite_master WHERE type = 'table' AND sql IS NOT NULL ORDER BY rowid"):
+    for (ddl,) in origem.execute("SELECT sql FROM sqlite_master WHERE type = 'table' AND sql IS NOT NULL AND name <> 'indice_alerta' ORDER BY rowid"):
         destino.execute(ddl)
     for t in TABELAS:
         with open(PASTA / f"{t}.csv", encoding="utf-8") as f:
@@ -77,6 +79,8 @@ def main():
         destino.executemany(f"INSERT INTO {t} ({', '.join(colunas)}) VALUES ({', '.join('?' * len(colunas))})", linhas)
     for (ddl,) in origem.execute("SELECT sql FROM sqlite_master WHERE type = 'view' ORDER BY rowid"):
         destino.execute(ddl)
+    # o índice de alerta é recalculado a partir das tabelas carregadas
+    destino.executescript((RAIZ / "database" / "indice_alerta.sql").read_text(encoding="utf-8"))
     destino.commit()
 
     # Conferência: contagens e somas iguais nos dois bancos
@@ -84,6 +88,8 @@ def main():
         "SELECT ROUND(SUM(co2_mt), 3) FROM emissao",
         "SELECT ROUND(SUM(co2_por_pib), 3) FROM emissao WHERE iso_code = 'BRA'",
         "SELECT ROUND(AVG(ipa), 3) FROM vw_indices_pesquisa",
+        "SELECT COUNT(*) FROM indice_alerta",
+        "SELECT ROUND(SUM(indice_alerta), 1) FROM indice_alerta",
     ]
     for sql in checagens:
         a, b = origem.execute(sql).fetchone()[0], destino.execute(sql).fetchone()[0]

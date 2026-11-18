@@ -71,3 +71,38 @@ FROM vw_indices_pesquisa;
 -- Q10. Metas e propostas de melhoria
 SELECT indicador, atual, meta, unidade FROM meta_indicador ORDER BY id_meta;
 SELECT id_acao, problema, proposta, prazo FROM acao_melhoria ORDER BY id_acao;
+
+-- =============================================================================
+-- ÍNDICE DE ALERTA (tabela indice_alerta, criada por database/indice_alerta.sql)
+-- =============================================================================
+
+-- Q11. Os 10 países com maior índice de alerta e o sinal que mais pesa em cada um
+SELECT posicao_alerta, nome_pt, indice_alerta, nivel_alerta,
+       CASE GREATEST(0.35*nota_tendencia, 0.25*nota_per_capita, 0.25*nota_intensidade, 0.15*nota_petroleo)
+            WHEN 0.35*nota_tendencia   THEN 'emissões crescendo'
+            WHEN 0.25*nota_per_capita  THEN 'muito CO2 por habitante'
+            WHEN 0.25*nota_intensidade THEN 'economia intensiva em carbono'
+            ELSE 'dependência de petróleo' END AS principal_sinal
+FROM indice_alerta ORDER BY posicao_alerta LIMIT 10;
+
+-- Q12. Quantos países em cada nível de alerta
+SELECT nivel_alerta, COUNT(*) AS paises, ROUND(AVG(indice_alerta),1) AS indice_medio
+FROM indice_alerta GROUP BY nivel_alerta ORDER BY indice_medio DESC;
+
+-- Q13. Brasil: notas de cada sinal, índice e projeção para 2030
+SELECT nome_pt, posicao_alerta, (SELECT COUNT(*) FROM indice_alerta) AS total_paises,
+       nota_tendencia, nota_per_capita, nota_intensidade, nota_petroleo,
+       indice_alerta, nivel_alerta, co2_2022, projecao_co2_2030
+FROM indice_alerta WHERE iso_code = 'BRA';
+
+-- Q14. Países que mais devem aumentar as emissões até 2030 (projeção pela tendência 2012–2022)
+SELECT nome_pt, co2_2022, projecao_co2_2030,
+       ROUND(projecao_co2_2030 - co2_2022, 1) AS aumento_previsto_mt
+FROM indice_alerta ORDER BY aumento_previsto_mt DESC LIMIT 10;
+
+-- Q15. Países que crescem as emissões e já emitem acima da média mundial por habitante
+SELECT nome_pt, variacao_10anos_pct, co2_per_capita
+FROM indice_alerta
+WHERE variacao_10anos_pct > 0
+  AND co2_per_capita > (SELECT co2_per_capita FROM emissao WHERE iso_code = 'OWID_WRL' AND ano = 2022)
+ORDER BY variacao_10anos_pct DESC;
